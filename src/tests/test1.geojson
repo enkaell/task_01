@@ -1,0 +1,16 @@
+{
+    "type":"FeatureCollection",
+    "features":[
+     {
+      "type":"Feature",
+      "geometry":{
+       "type":"LineString",
+       "coordinates":[
+        [
+         6.314184333333333,
+         51.437285833333334
+        ]
+    ]
+}}
+    ]
+}
