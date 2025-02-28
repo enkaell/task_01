@@ -38,6 +38,21 @@ async def insert_osm_json_linestring_into_kanten(osm_models_list: List[OSMtoDBMo
 async def execute_mapping_of_tables() -> None:
     conn = await asyncpg.connect(DB_URL)
     try:
+        # INSERT INTO mapping (kante_id, befahrung_id, gpsindexarray)
+        # SELECT 
+        #     k.id,  
+        #     b.id,  
+        #     ARRAY_AGG(i ORDER BY i)  -- Collects and sorts the matched indexes
+        # FROM befahrungen b
+        # JOIN kanten k 
+        # ON ST_DWithin(b.gps_points, k.kante, 1)  -- 1 meter proximity
+        # LEFT JOIN LATERAL (
+        #     SELECT i
+        #     FROM generate_series(1, ST_NumPoints(b.gps_points)) AS i
+        #     WHERE ST_DWithin(ST_PointN(b.gps_points, i), k.kante, 1)  
+        # ) AS matched_indexes ON true
+        # GROUP BY k.id, b.id;
+
         await conn.execute(
             """
             INSERT INTO kanten (id, name, kante) VALUES ($1, $2, $3);
