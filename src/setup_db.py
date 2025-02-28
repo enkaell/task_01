@@ -4,6 +4,8 @@ from config import DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT
 
 logging.basicConfig(level=logging.INFO)
 
+# :TODO data insertion pipeline is not stabil und straight-forward
+
 # Connect to 'postgres' to create database
 connection = psycopg2.connect(
     dbname="postgres",
